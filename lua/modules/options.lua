@@ -1,0 +1,19 @@
+local o = vim.opt
+
+o.number	= true
+o.autoindent	= true
+o.tabstop 	= 8
+o.softtabstop	= 4
+o.shiftwidth	= 4
+o.expandtab	= true
+o.belloff	= "all"
+o.incsearch	= true
+o.scrolloff	= 8
+o.signcolumn	= "yes"
+o.hidden	= true
+o.termguicolors = true
+o.background    = "dark"
+o.hlsearch      = false
+o.incsearch     = true
+o.guicursor     = ""
+vim.g.python3_host_prog = "/home/m83393/.config/nvim/nvim-venv/bin/python"
