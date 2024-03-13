@@ -8,8 +8,10 @@ Plug('nvim-tree/nvim-tree.lua')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('nvim-treesitter/playground')
 Plug('nvim-lua/plenary.nvim')
+-- Telescope
 Plug('nvim-telescope/telescope.nvim', {['tag'] = '0.1.5' })
 Plug('nvim-telescope/telescope-ui-select.nvim')
+Plug('mfussenegger/nvim-dap')
 -- LSP
 Plug('neovim/nvim-lspconfig')
 Plug('williamboman/mason.nvim')
