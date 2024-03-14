@@ -2,7 +2,6 @@ local lsp_zero = require('lsp-zero')
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-print("test")
 
 cmp.setup({
     window = {
