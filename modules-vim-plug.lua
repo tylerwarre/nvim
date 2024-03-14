@@ -11,7 +11,6 @@ Plug('nvim-lua/plenary.nvim')
 -- Telescope
 Plug('nvim-telescope/telescope.nvim', {['tag'] = '0.1.5' })
 Plug('nvim-telescope/telescope-ui-select.nvim')
-Plug('mfussenegger/nvim-dap')
 -- LSP
 Plug('neovim/nvim-lspconfig')
 Plug('williamboman/mason.nvim')
@@ -20,4 +19,6 @@ Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug('VonHeikemen/lsp-zero.nvim', {['branch'] = 'v3.x'})
+-- DAP
+Plug('mfussenegger/nvim-dap')
 vim.call('plug#end')
