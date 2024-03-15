@@ -4,6 +4,7 @@
 - https://github.com/stevearc/dressing.nvim
 - https://github.com/mbbill/undotree
 - https://github.com/nvim-lualine/lualine.nvim
+- https://github.com/tpope/vim-fugitive
 # File Tree
 ```
 ├── after
