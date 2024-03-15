@@ -5,7 +5,9 @@
 - https://github.com/mbbill/undotree
 - https://github.com/nvim-lualine/lualine.nvim
 - https://github.com/tpope/vim-fugitive
-- Skeleton files (pentest checklists, launch.json, python package, pyrightconfig.json)
+- Skeleton files (pentest checklists, launch.json, python package, pyrightconfig.json) lua-snip? (https://github.com/L3MON4D3/LuaSnip) or (https://github.com/molleweide/LuaSnip-snippets.nvim)
+- https://github.com/danymat/neogen
+- https://github.com/sainnhe/gruvbox-material
 # File Tree
 ```
 ├── after
