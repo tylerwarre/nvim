@@ -5,6 +5,7 @@
 - https://github.com/mbbill/undotree
 - https://github.com/nvim-lualine/lualine.nvim
 - https://github.com/tpope/vim-fugitive
+- Skeleton files (pentest checklists, launch.json, python package, pyrightconfig.json)
 # File Tree
 ```
 ├── after
