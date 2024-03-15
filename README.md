@@ -1,5 +1,9 @@
 # TODO
 - Configure nvim-dap to use DAPs from mason
+- https://github.com/rcarriga/nvim-notify
+-https://github.com/stevearc/dressing.nvim?tab=readme-ov-file
+- https://github.com/mbbill/undotree
+- https://github.com/nvim-lualine/lualine.nvim
 # File Tree
 ```
 ├── after
