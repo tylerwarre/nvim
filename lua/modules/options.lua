@@ -17,4 +17,5 @@ o.background        = "dark"
 o.hlsearch          = true
 o.incsearch         = true
 o.guicursor         = ""
+o.mouse             = ""
 vim.g.python3_host_prog = vim.fn.expand("$HOME/.config/nvim/nvim-venv/bin/python")
