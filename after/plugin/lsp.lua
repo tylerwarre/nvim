@@ -2,7 +2,6 @@ local lsp_zero = require('lsp-zero')
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-print("test")
 
 cmp.setup({
     window = {
@@ -28,7 +27,7 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "gR", function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "gR", function() require('telescope.builtin').lsp_references() end, { noremap = true, silent = true } )
     vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
