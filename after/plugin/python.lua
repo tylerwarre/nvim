@@ -43,8 +43,8 @@ dap.configurations.python = {
         local cwdFiles = vim.split(vim.fn.glob(cwd .. "/*"), '\n', {trimempty=true})
         for _, file in pairs(cwdFiles) do
             if file:match("^(.*)venv$") ~= nil then
-                print("Starting Session: " .. file .. "/bin/python")
-                return file .. '/bin/python'
+                print("Starting Session: " .. file .. "/bin/python3")
+                return file .. '/bin/python3'
             end
         end
         print("Starting Session: /usr/bin/python3")
