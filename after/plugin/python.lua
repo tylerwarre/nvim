@@ -35,6 +35,7 @@ dap.configurations.python = {
     -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 
     program = "${file}"; -- This configuration will launch the current file if used.
+    justMyCode =  false,
     pythonPath = function()
         -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
         -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
@@ -43,8 +44,8 @@ dap.configurations.python = {
         local cwdFiles = vim.split(vim.fn.glob(cwd .. "/*"), '\n', {trimempty=true})
         for _, file in pairs(cwdFiles) do
             if file:match("^(.*)venv$") ~= nil then
-                print("Starting Session: " .. file .. "/bin/python3")
-                return file .. '/bin/python3'
+                print("Starting Session: " .. file .. "/bin/python")
+                return file .. '/bin/python'
             end
         end
         print("Starting Session: /usr/bin/python3")
