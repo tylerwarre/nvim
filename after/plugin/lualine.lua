@@ -50,7 +50,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {{'filename', path=1}},
     lualine_x = {get_venv, 'filetype'},
     lualine_y = {'encoding'},
     lualine_z = {'searchcount', 'selectioncount', {get_progress, separator="", padding={left=1,right=0}}, {'location', padding={left=0,right=1}}}
