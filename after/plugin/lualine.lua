@@ -16,11 +16,23 @@ local function get_venv()
     end
 end
 
+local function get_progress()
+    local cur = vim.fn.line('.')
+    local total = vim.fn.line('$')
+    if cur == 1 then
+        return '(Top)'
+    elseif cur == total then
+        return '(Bot)'
+    else
+        return string.format('(%2d%%%%)', math.floor(cur / total * 100))
+    end
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
+    theme = 'gruvbox_dark',
+    component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
       statusline = {},
@@ -28,7 +40,7 @@ require('lualine').setup {
     },
     ignore_focus = {},
     always_divide_middle = true,
-    globalstatus = false,
+    globalstatus = true,
     refresh = {
       statusline = 1000,
       tabline = 1000,
@@ -39,9 +51,9 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
-    lualine_x = {'filetype', get_venv },
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_x = {get_venv, 'filetype'},
+    lualine_y = {'encoding'},
+    lualine_z = {'searchcount', 'selectioncount', {get_progress, separator="", padding={left=1,right=0}}, {'location', padding={left=0,right=1}}}
   },
   inactive_sections = {
     lualine_a = {},
