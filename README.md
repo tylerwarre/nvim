@@ -7,7 +7,7 @@
 - https://github.com/tpope/vim-fugitive
 - Skeleton files (pentest checklists, launch.json, python package, pyrightconfig.json) lua-snip? (https://github.com/L3MON4D3/LuaSnip) or (https://github.com/molleweide/LuaSnip-snippets.nvim)
 - https://github.com/danymat/neogen
-- https://github.com/ellisonleao/gruvbox.nvim
+- ~~https://github.com/ellisonleao/gruvbox.nvim~~
 # File Tree
 ```
 ├── after
