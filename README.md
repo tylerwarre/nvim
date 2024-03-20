@@ -3,12 +3,12 @@
 - https://github.com/rcarriga/nvim-notify
 - https://github.com/stevearc/dressing.nvim
 - https://github.com/mbbill/undotree
-- https://github.com/nvim-lualine/lualine.nvim
+-~~https://github.com/nvim-lualine/lualine.nvim~~
 
-    reuse lualine filetype icon & name. also how to set component options ([https://github.com/nvim-lualine/lualine.nvim/issues/475](https://github.com/nvim-lualine/lualine.nvim/issues/475)
+    ~~reuse lualine filetype icon & name. also how to set component options ([https://github.com/nvim-lualine/lualine.nvim/issues/475](https://github.com/nvim-lualine/lualine.nvim/issues/475)~~
 
-    if filetype = python show venv or python if no VENV used
-- https://github.com/tpope/vim-fugitive
+    ~~if filetype = python show venv or python if no VENV used~~
+-~~https://github.com/tpope/vim-fugitive~~
 - Skeleton files (pentest checklists, launch.json, python package, pyrightconfig.json) lua-snip? (https://github.com/L3MON4D3/LuaSnip) or (https://github.com/molleweide/LuaSnip-snippets.nvim)
 - https://github.com/danymat/neogen
 - implement focus_frame() in dap to jump back to current line
