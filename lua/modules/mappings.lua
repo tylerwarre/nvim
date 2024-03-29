@@ -8,8 +8,6 @@ vim.keymap.set("n", "<leader>L", "<C-W>l")
 vim.keymap.set("n", "<leader>Z", "<C-W>z")
 
 -- Change tabs with leader + vim arrow keys
-vim.keymap.set("n", "<leader>h", "gT")
-vim.keymap.set("n", "<leader>l", "gt")
 vim.keymap.set("n", "<leader>1", "1gt")
 vim.keymap.set("n", "<leader>2", "2gt")
 vim.keymap.set("n", "<leader>3", "3gt")
