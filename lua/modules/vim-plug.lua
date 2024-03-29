@@ -8,6 +8,9 @@ Plug('nvim-tree/nvim-tree.lua')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('nvim-treesitter/playground')
 Plug('nvim-lua/plenary.nvim')
+Plug('nvim-lualine/lualine.nvim')
+Plug('nvim-tree/nvim-web-devicons')
+Plug('tpope/vim-fugitive')
 -- Telescope
 Plug('nvim-telescope/telescope.nvim', {['tag'] = '0.1.5' })
 Plug('nvim-telescope/telescope-ui-select.nvim')
@@ -22,3 +25,4 @@ Plug('VonHeikemen/lsp-zero.nvim', {['branch'] = 'v3.x'})
 -- DAP
 Plug('mfussenegger/nvim-dap')
 vim.call('plug#end')
+
