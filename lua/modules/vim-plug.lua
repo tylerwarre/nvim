@@ -22,6 +22,7 @@ Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('L3MON4D3/LuaSnip')
 Plug('VonHeikemen/lsp-zero.nvim', {['branch'] = 'v3.x'})
+Plug('mfussenegger/nvim-jdtls')
 -- DAP
 Plug('mfussenegger/nvim-dap')
 vim.call('plug#end')

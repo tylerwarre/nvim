@@ -13,7 +13,11 @@ cmp.setup({
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
         ['<C-y>'] = cmp.mapping.confirm({ select = true}),
         ['<C-Space>'] = cmp.mapping.complete(),
-    })
+    }),
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' }
+    }
 })
 
 ---@diagnostic disable-next-line: unused-local
@@ -29,7 +33,8 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "gR", function() require('telescope.builtin').lsp_references() end, { noremap = true, silent = true } )
     vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.hover() end, opts)
 end)
 
 require("mason").setup()
