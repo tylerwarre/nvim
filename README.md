@@ -1,4 +1,5 @@
 # TODO
+- Add logic to use hover only if signature_help is unavailable in vim-cmp configuration
 - Configure nvim-dap to use DAPs from mason
 - https://github.com/rcarriga/nvim-notify
 - https://github.com/stevearc/dressing.nvim
