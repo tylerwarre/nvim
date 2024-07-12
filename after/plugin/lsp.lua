@@ -49,7 +49,7 @@ require("mason-lspconfig").setup({
                     }
                 }
             })
-        end,
+        end
     },
 })
 
