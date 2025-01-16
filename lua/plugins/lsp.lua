@@ -77,6 +77,7 @@ return {
             },
             completion = {
                 documentation =  {
+                    auto_show = true,
                     window = {
                         border = "rounded",
                     }
@@ -85,7 +86,7 @@ return {
                     border = "rounded",
                 },
                 ghost_text = {
-                    enabled = true,
+                    enabled = false,
                 },
             }
         },
