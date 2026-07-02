@@ -3,7 +3,11 @@ vim.api.nvim_create_autocmd('PackChanged', {
 	callback = function(ev)
 		local name, kind = ev.data.spec.name, ev.data.kind
 		if name == 'telescope-fzf-native.nvim' and (kind == 'install' or kind == 'update') then
-			vim.system({ 'make' }, { cwd = ev.data.path })
+			if vim.fn.has("win32") == 1 then
+				vim.system({ 'powershell.exe', '-Command', 'cmake -B build; cmake --build build; cp build/Debug/* build/' }, { cwd = ev.data.path })
+			else
+				vim.system({ 'make' }, { cwd = ev.data.path })
+			end
 		end
 	end,
 })
