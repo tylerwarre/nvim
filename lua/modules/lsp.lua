@@ -63,6 +63,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-
 checkLsps()
 vim.lsp.enable(enabledLsps)
