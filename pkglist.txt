@@ -1,5 +1,4 @@
 ripgrep
-fd
-lua-language-server
+fd-find
 clangd
-base-devel
+build-essential
