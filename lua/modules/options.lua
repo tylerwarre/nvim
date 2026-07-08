@@ -4,6 +4,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth  = 4
 vim.opt.expandtab   = false
 vim.opt.autoindent  = true
+vim.opt.signcolumn  = "yes"
 vim.opt.mouse       = ""
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 -- Define LSP Diagnostic Symbols
