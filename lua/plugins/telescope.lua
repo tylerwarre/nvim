@@ -34,5 +34,30 @@ require('telescope').setup {
 	}
 }
 
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('ui-select')
+local function checkhealth_fzf()
+	local load = false
+	local lib = vim.fn.stdpath('data') .. "/site/pack/core/opt/telescope-fzf-native.nvim/build/libfzf"
+
+	if vim.fn.has("win32") == 1 then
+		if vim.uv.fs_stat(lib .. ".dll") then
+			load = true
+		end
+	else
+		if vim.uv.fs_stat(lib .. ".so") then
+			load = true
+		end
+	end
+
+	if load then
+		require('telescope').load_extension('fzf')
+	end
+end
+
+-- Load telescope plugins
+pcall(function()
+	require('telescope').load_extension('fzf')
+end)
+
+pcall(function()
+	require('telescope').load_extension('ui-select')
+end)
