@@ -109,7 +109,7 @@ toggle_breakpoint = function(lnum)
 	local status, module = pcall(require, "languages." .. ft)
 	if signs[1] == nil then
 		vim.fn.sign_place(0, 'Breakpoint', 'Breakpoint', bufnr, { lnum = lnum })
-		if status then
+		if status and type(module.delete_breakpoint) == "function" then
 			result = module.write_breakpoint(lnum)
 		else
 			result = f_write_breakpoint(lnum, ".breakpoints")
@@ -120,7 +120,7 @@ toggle_breakpoint = function(lnum)
 		end
 	else
 		vim.fn.sign_unplace('Breakpoint', { buffer = bufnr, id = signs[1].id })
-		if status then
+		if status and type(module.delete_breakpoint) == "function" then
 			result = module.delete_breakpoint(lnum)
 		else
 			result = f_delete_breakpoint(lnum, ".breakpoints")

@@ -1,38 +1,14 @@
-local enabledLsps = {
-	"clangd", -- C/C++
-	"lua_ls" -- lua
-}
-
-local lsp_healthchecks = {}
-
-local function removeLsp(lsp)
-	for i, v in ipairs(enabledLsps) do
-		if v == lsp then
-			table.remove(enabledLsps, i)
-			break
+local function enable_lsps()
+	local lsps = {}
+	local languages = require("languages")
+	for _, lang in ipairs(languages) do
+		if lang.module.lsp_healthcheck() then
+			table.insert(lsps, lang.module.lsp)
 		end
 	end
+
+	vim.lsp.enable(lsps)
 end
-
-local function checkLsps()
-	for i, v in ipairs(enabledLsps) do
-		lsp_healthchecks[v]()
-	end
-end
-
-
-lsp_healthchecks.lua_ls = function()
-	if vim.fn.executable('lua-language-server') ~= 1 then
-		removeLsp("lua_ls")
-	end
-end
-
-lsp_healthchecks.clangd = function()
-	if vim.fn.executable('clangd') ~= 1 then
-		removeLsp("clangd")
-	end
-end
-
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -63,5 +39,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-checkLsps()
-vim.lsp.enable(enabledLsps)
+enable_lsps()
