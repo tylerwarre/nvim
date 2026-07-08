@@ -1,4 +1,4 @@
-local debug = {}
+local export = {}
 
 -- Forward declaration of functions
 local toggle_breakpoint
@@ -14,23 +14,9 @@ vim.fn.sign_define("Breakpoint", {
 	texthl = "Debug"
 })
 
--- Autocommands
-local auto_group = vim.api.nvim_create_augroup("CDebug", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "c", "cpp" },
-	group = auto_group,
-	callback = function()
-		-- Read breakpoints file async
-		vim.schedule(function()
-			f_read_breakpoints()
-		end)
-	end,
-})
-
 -- Local Functions
-f_read_breakpoints = function()
-	local f = io.open(vim.fn.getcwd() .. "/.gdbinit", "r")
+f_read_breakpoints = function(dbgname)
+	local f = io.open(vim.fn.getcwd() .. "/" .. dbgname, "r")
 
 	local content
 	if f then
@@ -51,8 +37,8 @@ f_read_breakpoints = function()
 	return true
 end
 
-local function f_find_breakpoint(lnum)
-	local f = io.open(vim.fn.getcwd() .. "/.gdbinit", "r")
+local function f_find_breakpoint(lnum, dbgname)
+	local f = io.open(vim.fn.getcwd() .. "/" .. dbgname, "r")
 
 	local content
 	if f then
@@ -69,8 +55,8 @@ local function f_find_breakpoint(lnum)
 	end
 end
 
-local function f_delete_breakpoint(lnum)
-	local f = io.open(vim.fn.getcwd() .. "/.gdbinit", "r")
+local function f_delete_breakpoint(lnum, dbgname)
+	local f = io.open(vim.fn.getcwd() .. "/" .. dbgname, "r")
 
 	local content
 	if f then
@@ -80,7 +66,7 @@ local function f_delete_breakpoint(lnum)
 		return false
 	end
 
-	f = io.open(vim.fn.getcwd() .. "/.gdbinit", "w")
+	f = io.open(vim.fn.getcwd() .. "/" .. dbgname, "w")
 	if f then
 		content = content:gsub("break " .. vim.fn.expand('%:t') .. ":" .. lnum .. "\n", "")
 		f:write(content)
@@ -92,16 +78,15 @@ local function f_delete_breakpoint(lnum)
 	return true
 end
 
-local function f_write_breakpoint(lnum)
-	local f = io.open(vim.fn.getcwd() .. "/.gdbinit", "a")
+local function f_write_breakpoint(lnum, dbgname)
+	local f = io.open(vim.fn.getcwd() .. "/" .. dbgname, "a")
 
 	-- Exit if the breakpoint already exists in file
-	if f_find_breakpoint(lnum) then
+	if f_find_breakpoint(lnum, dbgname) then
 		return true
 	end
 
 	if f then
-		print("Writing breakpoint")
 		f:write("break " .. vim.fn.expand('%:t') .. ":" .. lnum .. "\n")
 		f:close()
 	else
@@ -119,15 +104,30 @@ toggle_breakpoint = function(lnum)
 
 	local signs = vim.fn.sign_getplaced('%', { group = 'Breakpoint', lnum = lnum })[1].signs
 
+	local result
+	local ft = vim.bo.filetype
+	local status, module = pcall(require, "languages." .. ft)
 	if signs[1] == nil then
 		vim.fn.sign_place(0, 'Breakpoint', 'Breakpoint', bufnr, { lnum = lnum })
-		if f_write_breakpoint(lnum) == false then
-			print("Unable to write breakpoint to file")
+		if status then
+			result = module.write_breakpoint(lnum)
+		else
+			result = f_write_breakpoint(lnum, ".breakpoints")
+		end
+
+		if result == false then
+			vim.print("Unable to write breakpoint to file")
 		end
 	else
 		vim.fn.sign_unplace('Breakpoint', { buffer = bufnr, id = signs[1].id })
-		if f_delete_breakpoint(lnum) == false then
-			print("Unable to delete breakpoint from file")
+		if status then
+			result = module.delete_breakpoint(lnum)
+		else
+			result = f_delete_breakpoint(lnum, ".breakpoints")
+		end
+
+		if result == false then
+			vim.print("Unable to delete breakpoint from file")
 		end
 	end
 end
@@ -139,6 +139,8 @@ vim.api.nvim_create_user_command("Break", function()
 end, {})
 
 -- Export functions
-debug.toggle_breakpoint = toggle_breakpoint
+export.f_read_breakpoints = f_read_breakpoints
+export.f_write_breakpoint = f_write_breakpoint
+export.f_delete_breakpoint = f_delete_breakpoint
 
-return debug
+return export
