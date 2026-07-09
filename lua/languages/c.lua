@@ -1,10 +1,13 @@
 -- Imports
 local debug = require('modules.debug')
+local health = require('languages.health')
 
 -- Locals
 local export = {}
 local dbgname = ".gdbinit"
 local lsp = "clangd"
+local lsp_exec = "clangd"
+local lsp_version = "22.1.6"
 local auto_group = vim.api.nvim_create_augroup("CBreakpoints", { clear = true })
 
 -- Autocommands
@@ -29,18 +32,39 @@ local function delete_breakpoint(lnum)
 end
 
 -- LSP functions
-local function lsp_healthcheck()
-	if vim.fn.executable('clangd') ~= 1 then
-		return false
+local function check_exec()
+	health._check_exec(lsp_exec)
+end
+
+local function check_version()
+	health._check_version(lsp_exec, lsp_version)
+end
+
+local function check_config()
+	health._check_config(lsp)
+end
+
+local function check()
+	local ok = true
+	vim.health.start("C")
+
+	if check_exec() ~= true then
+		ok = false
+	end
+	if check_version() ~= true then
+		ok = false
+	end
+	if check_config() ~= true then
+		ok = false
 	end
 
-	return true
+	return ok
 end
 
 -- Exported functions
 export.write_breakpoint = write_breakpoint
 export.delete_breakpoint = delete_breakpoint
-export.lsp_healthcheck = lsp_healthcheck
+export.check = check
 
 -- Exported locals
 export.lsp = lsp
