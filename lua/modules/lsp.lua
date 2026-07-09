@@ -1,15 +1,18 @@
+-- Function creates autocommands for all languages specified in the language module
 local function enable_lsps()
-	local result
-	local lsps = {}
 	local languages = require("languages")
-	vim.print(languages)
-	for _, lang in ipairs(languages) do
-		if lang.module.check(true) then
-			table.insert(lsps, lang.module.lsp)
-		end
-	end
 
-	vim.lsp.enable(lsps)
+	for _, lang in ipairs(languages) do
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = lang.name,
+			once = true,
+			callback = function()
+				if lang.module.check(true) then
+					vim.lsp.enable(lang.module.lsp)
+				end
+			end
+		})
+	end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
