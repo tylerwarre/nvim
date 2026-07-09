@@ -43,6 +43,4 @@ export.check = check
 -- Exported locals
 export.lsp = lsp
 
--- Exp
-
 return export
