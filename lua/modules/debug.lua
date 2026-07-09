@@ -10,7 +10,7 @@ vim.api.nvim_set_hl(0, "Debug", {
 })
 
 vim.fn.sign_define("Breakpoint", {
-	text = "◍",
+	text = "○",
 	texthl = "Debug"
 })
 
