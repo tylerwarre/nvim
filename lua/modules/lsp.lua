@@ -2,8 +2,9 @@ local function enable_lsps()
 	local result
 	local lsps = {}
 	local languages = require("languages")
+	vim.print(languages)
 	for _, lang in ipairs(languages) do
-		if lang.module.check() then
+		if lang.module.check(true) then
 			table.insert(lsps, lang.module.lsp)
 		end
 	end
@@ -40,4 +41,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-vim.defer_fn(enable_lsps(), 250)
+enable_lsps()

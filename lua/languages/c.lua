@@ -32,29 +32,29 @@ local function delete_breakpoint(lnum)
 end
 
 -- LSP functions
-local function check_exec()
-	health._check_exec(lsp_exec)
+local function check_exec(is_startup)
+	health._check_exec(lsp_exec, is_startup)
 end
 
-local function check_version()
-	health._check_version(lsp_exec, lsp_version)
+local function check_version(is_startup)
+	health._check_version(lsp_exec, lsp_version, is_startup)
 end
 
-local function check_config()
-	health._check_config(lsp)
+local function check_config(is_startup)
+	health._check_config(lsp, is_startup)
 end
 
-local function check()
+local function check(is_startup)
 	local ok = true
 	vim.health.start("C")
 
-	if check_exec() ~= true then
+	if check_exec(is_startup) ~= true then
 		ok = false
 	end
-	if check_version() ~= true then
+	if check_version(is_startup) ~= true then
 		ok = false
 	end
-	if check_config() ~= true then
+	if check_config(is_startup) ~= true then
 		ok = false
 	end
 
