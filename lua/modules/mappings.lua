@@ -12,3 +12,6 @@ vim.keymap.set('n', '<leader>db', function() vim.cmd("Break") end, { desc = 'Deb
 -- Checkbox
 vim.keymap.set('n', '<leader>cc', "<cmd>normal! 0t]rx<CR>")
 vim.keymap.set('n', '<leader>cu', "<cmd>normal! 0t]r<Space><CR>")
+
+-- LSP
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
