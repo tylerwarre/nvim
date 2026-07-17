@@ -49,6 +49,28 @@ local function _check_config(lsp, is_startup)
 	return ok
 end
 
+local function _check_treesitter(language, is_startup)
+	if is_startup ~= nil then
+		return true
+	end
+
+	local ok = false
+	local parsers = vim.api.nvim_get_runtime_file("parser/*.so", true)
+	for _, path in ipairs(parsers) do
+		if vim.fs.basename(path) == language .. ".so" then
+			ok = true
+			vim.health.ok("Treesitter Parser: treesitter parser found for '" .. language .. "'")
+			break
+		end
+	end
+
+	if ok == false then
+		vim.health.error("Treesitter Parser: No treesitter parser found for '" .. language .. "'")
+	end
+
+	return ok
+end
+
 local function check(is_startup)
 	local languages = require("languages")
 	for _, lang in ipairs(languages) do
@@ -60,5 +82,6 @@ export.check = check
 export._check_exec = _check_exec
 export._check_version = _check_version
 export._check_config = _check_config
+export._check_treesitter = _check_treesitter
 
 return export

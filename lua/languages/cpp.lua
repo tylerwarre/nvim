@@ -7,12 +7,13 @@ local export = {}
 local dbgname = ".gdbinit"
 local lsp = "clangd"
 local lsp_exec = "clangd"
-local lsp_version = "22.1.6"
-local auto_group = vim.api.nvim_create_augroup("CppBreakpoints", { clear = true })
+local lsp_version = "22.1.8"
+local language = "cpp"
+local auto_group = vim.api.nvim_create_augroup(language .. "Breakpoints", { clear = true })
 
 -- Autocommands
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "cpp",
+	pattern = language,
 	group = auto_group,
 	callback = function()
 		-- Read breakpoints file async
@@ -22,7 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Debug Functions
+-- Debug functions
 local function write_breakpoint(lnum)
 	debug.f_write_breakpoint(lnum, dbgname)
 end
@@ -44,9 +45,13 @@ local function check_config(is_startup)
 	return health._check_config(lsp, is_startup)
 end
 
+local function check_treesitter(is_startup)
+	return health._check_treesitter(language, is_startup)
+end
+
 local function check(is_startup)
 	local ok = true
-	if is_startup == nil then vim.health.start("Cpp") end
+	if is_startup == nil then vim.health.start(language) end
 
 	if check_exec(is_startup) ~= true then
 		ok = false
@@ -55,6 +60,9 @@ local function check(is_startup)
 		ok = false
 	end
 	if check_config(is_startup) ~= true then
+		ok = false
+	end
+	if check_treesitter(is_startup) ~= true then
 		ok = false
 	end
 

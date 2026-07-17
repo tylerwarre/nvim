@@ -6,6 +6,7 @@ local export = {}
 local lsp = "lua_ls"
 local lsp_exec = "lua-language-server"
 local lsp_version = "3.18.2"
+local language = "lua"
 
 -- LSP Functions
 local function check_exec(is_startup)
@@ -20,9 +21,13 @@ local function check_config(is_startup)
 	return health._check_config(lsp, is_startup)
 end
 
+local function check_treesitter(is_startup)
+	return health._check_treesitter(language, is_startup)
+end
+
 local function check(is_startup)
 	local ok = true
-	if is_startup == nil then vim.health.start("Lua") end
+	if is_startup == nil then vim.health.start(language) end
 
 	if check_exec(is_startup) ~= true then
 		ok = false
@@ -31,6 +36,9 @@ local function check(is_startup)
 		ok = false
 	end
 	if check_config(is_startup) ~= true then
+		ok = false
+	end
+	if check_treesitter(is_startup) ~= true then
 		ok = false
 	end
 
