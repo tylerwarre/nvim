@@ -63,7 +63,7 @@ end
 
 ---@type vim.lsp.Config
 return {
-	cmd = { 'clangd' },
+	cmd = { 'clangd', '--malloc-trim' },
 	filetypes = { 'c', 'cpp' },
 	root_markers = {
 		'.clangd',

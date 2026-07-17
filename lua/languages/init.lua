@@ -3,7 +3,8 @@ local export = {}
 local enabled_langs = {
 	"c",
 	"cpp",
-	"lua"
+	"lua",
+	"python"
 }
 
 for _, lang in ipairs(enabled_langs) do

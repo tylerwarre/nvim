@@ -9,7 +9,8 @@ require('telescope').setup {
 				-- e.g. git_{create, delete, ...}_branch for the git_branches picker
 				["<C-h>"] = "which_key"
 			}
-		}
+		},
+		file_ignore_patterns = { "-venv" }
 	},
 	pickers = {
 		-- Default configuration for builtin pickers goes here:
@@ -34,6 +35,8 @@ require('telescope').setup {
 	}
 }
 
+---@diagnostic disable: unused-function
+---@diagnostic disable-next-line: unused-local
 local function checkhealth_fzf()
 	local load = false
 	local lib = vim.fn.stdpath('data') .. "/site/pack/core/opt/telescope-fzf-native.nvim/build/libfzf"
