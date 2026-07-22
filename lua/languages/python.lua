@@ -79,7 +79,11 @@ export.check = check
 export.lsp = lsp
 
 -- Language Settings
-vim.g.python3_host_prog = venv_path .. 'bin/python'
+if vim.fn.has("win32") == 1 then
+	vim.g.python3_host_prog = venv_path .. 'Scripts/python'
+else
+	vim.g.python3_host_prog = venv_path .. 'bin/python'
+end
 vim.env.PATH = vim.env.PATH .. ':' .. venv_path .. 'bin/'
 
 return export
