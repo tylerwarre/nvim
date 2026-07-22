@@ -9,7 +9,7 @@ local lsp = "basedpyright"
 local lsp_exec = "basedpyright"
 local lsp_version = "1.39.9"
 local language = "python"
-local venv_path = '/home/tyler/.config/nvim/nvim-venv/'
+local venv_path = vim.fn.stdpath("config") .. '/nvim-venv/'
 local auto_group = vim.api.nvim_create_augroup(language .. "Breakpoints", { clear = true })
 
 -- Autocommands
