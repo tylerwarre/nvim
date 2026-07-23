@@ -42,6 +42,7 @@ return {
 				autoSearchPaths = true,
 				diagnosticMode = 'openFilesOnly',
 				typeCheckingMode = 'standard',
+				-- TODO: update to be portable and relative to ida venv
 				extraPaths = { '/opt/ida-pro-9.3/python/' },
 				-- https://docs.basedpyright.com/latest/configuration/language-server-settings/
 				-- Explicitly setting `basedpyright.analysis.useLibraryCodeForTypes` is **discouraged** by the official docs.
