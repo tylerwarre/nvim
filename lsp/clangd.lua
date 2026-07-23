@@ -61,6 +61,7 @@ end
 ---@class ClangdInitializeResult: lsp.InitializeResult
 ---@field offsetEncoding? string
 
+-- TODO: Investigate windows portability. --malloc-trim may be the problem
 ---@type vim.lsp.Config
 return {
 	cmd = { 'clangd', '--malloc-trim' },

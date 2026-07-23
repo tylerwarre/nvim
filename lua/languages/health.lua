@@ -59,6 +59,7 @@ local function _check_config(lsp, is_startup)
 	return ok
 end
 
+-- TODO: Investigate windows portability
 local function _check_treesitter(language, is_startup)
 	local ok = false
 	local parsers = vim.api.nvim_get_runtime_file("parser/*.so", true)
