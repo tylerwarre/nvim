@@ -27,6 +27,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-telescope/telescope.nvim.git",            version = "v0.2.2" },
 })
 
+-- TODO: Add dynamic plugin module loading w/ error handling
 require("plugins.gruvbox")
 require("plugins.lualine")
 require("plugins.oil")
