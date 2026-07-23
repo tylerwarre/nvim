@@ -8,7 +8,11 @@ local function enable_lsps()
 			pattern = lang.name,
 			once = true,
 			callback = function()
-				if health.check_lsp(lang.module) then
+				local status, ok = pcall(function()
+					return health.check_lsp(lang.module)
+				end)
+
+				if status == true and ok == true then
 					vim.lsp.enable(lang.module.lsp)
 				end
 			end

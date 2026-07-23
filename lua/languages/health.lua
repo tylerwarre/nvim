@@ -88,47 +88,56 @@ local function check()
 		-- Skip if language is not defined in module since we don't know the name of
 		--	the health report
 		if lang.module.language ~= nil then
+			local ok = true
+
 			vim.health.start(lang.module.language)
-			-- Check LSP Config
-			if type(lang.module.check_config) == "function" then
-				-- Run override function
-				lang.module.check_config(false)
-			else
-				-- Run default function
-				_check_config(lang.module.lsp, false)
-			end
-
-			-- Check Treesitter Grammer File
-			if type(lang.module.check_treesitter) == "function" then
-				-- Run override function
-				lang.module.check_treesitter(false)
-			else
-				-- Run default function
-				_check_treesitter(lang.module.language, false)
-			end
-
-			-- Check LSP Executable
-			if type(lang.module.check_exec) == "function" then
-				-- Run override function
-				if lang.module.check_exec(false) ~= true then
-					-- return early since version will fail if exec fails
-					return false
+			local status = pcall(function()
+				-- Check LSP Config
+				if type(lang.module.check_config) == "function" then
+					-- Run override function
+					lang.module.check_config(false)
+				else
+					-- Run default function
+					_check_config(lang.module.lsp, false)
 				end
-			else
-				-- Run default function
-				if _check_exec(lang.module.lsp_exec, false) ~= true then
-					-- return early since version will fail if exec fails
-					return false
-				end
-			end
 
-			-- Check LSP Verison
-			if type(lang.module.check_version) == "function" then
-				-- Run override function
-				lang.module.check_version(false)
-			else
-				-- Run default function
-				_check_version(lang.module.lsp_exec, lang.module.lsp_version, false)
+				-- Check Treesitter Grammer File
+				if type(lang.module.check_treesitter) == "function" then
+					-- Run override function
+					lang.module.check_treesitter(false)
+				else
+					-- Run default function
+					_check_treesitter(lang.module.language, false)
+				end
+
+				-- Check LSP Executable
+				if type(lang.module.check_exec) == "function" then
+					-- Run override function
+					if lang.module.check_exec(false) ~= true then
+						ok = false
+					end
+				else
+					-- Run default function
+					if _check_exec(lang.module.lsp_exec, false) ~= true then
+						ok = false
+					end
+				end
+
+				-- Check LSP Verison
+				-- return early if exec failed
+				if ok == true then
+					if type(lang.module.check_version) == "function" then
+						-- Run override function
+						lang.module.check_version(false)
+					else
+						-- Run default function
+						_check_version(lang.module.lsp_exec, lang.module.lsp_version, false)
+					end
+				end
+			end)
+
+			if status == false then
+				vim.health.error("Unexpected error when performing healthcheck")
 			end
 		end
 	end
