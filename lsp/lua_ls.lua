@@ -90,6 +90,11 @@ return {
 			hint = { enable = true, semicolon = 'Disable' },
 			-- required for lua_ls to recognize 'vim' in config
 			diagnostics = { globals = { 'vim', 'hl' } },
+			workspace = {
+				library = {
+					"/usr/share/hypr/stubs"
+				}
+			}
 		},
 	},
 }

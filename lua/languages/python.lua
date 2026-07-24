@@ -8,7 +8,7 @@ local lsp = "basedpyright"
 local lsp_exec = "basedpyright"
 local lsp_version = "1.39.9"
 local language = "python"
-local venv_path = '/home/tyler/.config/nvim/nvim-venv/'
+local venv_path = vim.fn.stdpath("config") .. '/nvim-venv/'
 local auto_group = vim.api.nvim_create_augroup(language .. "Breakpoints", { clear = true })
 
 -- Autocommands
@@ -45,7 +45,12 @@ export.lsp_version = lsp_version
 export.language = language
 
 -- Language Settings
-vim.g.python3_host_prog = venv_path .. 'bin/python'
-vim.env.PATH = vim.env.PATH .. ':' .. venv_path .. 'bin/'
+if vim.fn.has("win32") == 1 then
+	vim.g.python3_host_prog = venv_path .. 'Scripts/python'
+	vim.env.PATH = vim.env.PATH .. ':' .. venv_path .. 'Scripts/'
+else
+	vim.g.python3_host_prog = venv_path .. 'bin/python'
+	vim.env.PATH = vim.env.PATH .. ':' .. venv_path .. 'bin/'
+end
 
 return export

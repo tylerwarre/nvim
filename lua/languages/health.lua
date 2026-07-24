@@ -59,13 +59,20 @@ local function _check_config(lsp, is_startup)
 	return ok
 end
 
--- TODO: Investigate windows portability
 local function _check_treesitter(language, is_startup)
 	local ok = false
-	local parsers = vim.api.nvim_get_runtime_file("parser/*.so", true)
+	local ext = ""
+
+	if vim.fn.has("win32") == 1 then
+		ext = ".dll"
+	else
+		ext = ".so"
+	end
+
+	local parsers = vim.api.nvim_get_runtime_file("parser/*" .. ext, true)
 
 	for _, path in ipairs(parsers) do
-		if vim.fs.basename(path) == language .. ".so" then
+		if vim.fs.basename(path) == language .. ext then
 			ok = true
 			if is_startup == false then
 				vim.health.ok("Treesitter Parser: treesitter parser found for '" .. language .. "'")
