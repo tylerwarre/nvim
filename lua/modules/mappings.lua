@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- Telescope
-local status, telescope pcall(function()
+local status, telescope = pcall(function()
 	return require('telescope.builtin')
 end)
 
