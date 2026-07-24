@@ -42,7 +42,12 @@ return {
 				autoSearchPaths = true,
 				diagnosticMode = 'openFilesOnly',
 				typeCheckingMode = 'standard',
-				extraPaths = { '/opt/ida-pro-9.3/python/' },
+				-- TODO: Make paths portable for windows, linux, and version agnostic
+				extraPaths = {
+					'/opt/ida-pro-9.3/python/',
+					vim.fn.expand('~') ..
+					'/.config/ghidra/ghidra-venv/lib/python3.14/site-packages/',
+				},
 				-- https://docs.basedpyright.com/latest/configuration/language-server-settings/
 				-- Explicitly setting `basedpyright.analysis.useLibraryCodeForTypes` is **discouraged** by the official docs.
 				-- Because it will override per-project configurations like `pyproject.toml`.

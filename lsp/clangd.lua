@@ -58,13 +58,23 @@ local function symbol_info(bufnr, client)
 	end, bufnr)
 end
 
+local function get_cmd()
+	local cmd = { 'clangd' }
+
+	-- malloc-trim is only compatible on linux
+	if vim.fn.has("linux") == 1 then
+		table.insert(cmd, "--malloc-trim")
+	end
+
+	return cmd
+end
+
 ---@class ClangdInitializeResult: lsp.InitializeResult
 ---@field offsetEncoding? string
 
--- TODO: Investigate windows portability. --malloc-trim may be the problem
 ---@type vim.lsp.Config
 return {
-	cmd = { 'clangd', '--malloc-trim' },
+	cmd = get_cmd(),
 	filetypes = { 'c', 'cpp' },
 	root_markers = {
 		'.clangd',
