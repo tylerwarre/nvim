@@ -2,3 +2,4 @@ ripgrep
 fd-find
 clangd
 build-essential
+tree-sitter-cli
