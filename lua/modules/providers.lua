@@ -1,9 +1,10 @@
 -- Python Provider
-local venv_path = vim.fn.stdpath("data") .. '\\nvim-venv\\'
 if vim.fn.has("win32") == 1 then
+	local venv_path = vim.fn.stdpath("data") .. '\\nvim-venv\\'
 	vim.g.python3_host_prog = venv_path .. 'Scripts\\python'
 	vim.env.PATH = vim.env.PATH .. ';' .. venv_path .. 'Scripts\\'
 else
+	local venv_path = vim.fn.stdpath("data") .. '/nvim-venv/'
 	vim.g.python3_host_prog = venv_path .. 'bin/python'
 	vim.env.PATH = vim.env.PATH .. ':' .. venv_path .. 'bin/'
 end
