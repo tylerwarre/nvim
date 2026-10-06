@@ -1,5 +1,6 @@
 require("modules.lsp")
 require("modules.options")
 require("modules.mappings")
+require("modules.providers")
 require("modules.pentesting")
 require("modules.debug")

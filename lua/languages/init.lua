@@ -4,7 +4,8 @@ local enabled_langs = {
 	"c",
 	"cpp",
 	"lua",
-	"python"
+	"python",
+	"typescript"
 }
 
 for _, lang in ipairs(enabled_langs) do
